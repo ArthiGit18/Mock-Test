@@ -1,0 +1,37 @@
+<!-- report.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Test Report</title>
+</head>
+<body>
+  <h1>Your IELTS Test Report</h1>
+  <div id="result"></div>
+
+  <script>
+    const email = new URLSearchParams(location.search).get("user");
+    const result = {
+      status: "COMPLETED",
+      message: "The attempt has been finished",
+      user: email,
+      bandScores: {
+        Reading: 7.5,
+        Writing: 6.5,
+        Listening: 8.0,
+        Speaking: 7.0
+      }
+    };
+
+    const div = document.getElementById("result");
+    div.innerHTML = `
+      <p><strong>Status:</strong> ${result.status}</p>
+      <p><strong>User:</strong> ${result.user}</p>
+      <p><strong>Message:</strong> ${result.message}</p>
+      <h3>Band Scores</h3>
+      <ul>
+        ${Object.entries(result.bandScores).map(([k,v]) => `<li>${k}: ${v}</li>`).join("")}
+      </ul>
+    `;
+  </script>
+</body>
+</html>

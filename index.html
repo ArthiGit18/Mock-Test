@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mock Test Templates</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f2f2f2;
+        }
+
+        .template-card {
+            background: white;
+            padding: 16px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .template-card h2 {
+            margin: 0;
+        }
+
+        .template-card p {
+            margin: 4px 0;
+        }
+
+        .overview {
+            margin-top: 10px;
+            display: none;
+            background: #f9f9f9;
+            padding: 10px;
+            border-radius: 6px;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 6px 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Available Mock Tests</h1>
+    <div id="templateContainer">Loading templates...</div>
+
+    <script>
+        async function fetchTemplates() {
+            try {
+                const response = await fetch("http://localhost:3000/api/templates", {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "secret": "dummy-secret"
+                    }
+                });
+
+                const result = await response.json();
+                const container = document.getElementById("templateContainer");
+                container.innerHTML = ""; // clear loading text
+
+                if (!result.error && result.data.length > 0) {
+                    result.data.forEach((template, index) => {
+                        const card = document.createElement("div");
+                        card.className = "template-card";
+
+                        card.innerHTML = `
+              <h2>${template.name || 'Test ' + (index + 1)}</h2>
+              <p><strong>Module:</strong> ${template.module}</p>
+              <p><strong>Mock Type:</strong> ${template.mockType}</p>
+              <p><strong>Duration:</strong> ${template.duration} seconds</p>
+             <button onclick="window.location.href='instruction.html?id=${template.id}'">Overview</button>
+
+            
+            `;
+
+                        container.appendChild(card);
+                    });
+                } else {
+                    container.innerHTML = "<p>No templates found.</p>";
+                }
+            } catch (error) {
+                document.getElementById("templateContainer").innerHTML = `<p>Error loading templates: ${error.message}</p>`;
+            }
+        }
+
+        function toggleOverview(id) {
+            const el = document.getElementById(id);
+            el.style.display = el.style.display === "none" ? "block" : "none";
+        }
+
+        fetchTemplates();
+    </script>
+</body>
+
+</html>

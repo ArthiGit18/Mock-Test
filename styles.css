@@ -1,0 +1,81 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  padding: 20px;
+}
+
+.container {
+  max-width: 600px;
+  margin: auto;
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.result-box {
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 8px;
+  background: #fafafa;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+.result-item {
+  margin-bottom: 10px;
+}
+
+.result-item span {
+  font-weight: bold;
+  color: #333;
+}
+
+.attempt {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.attempt input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.attempt button {
+  padding: 10px;
+  font-size: 16px;
+  background: #0a85ff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.attempt button:hover {
+  background: #066ad3;
+}
+
+@media screen and (max-width: 500px) {
+  .container {
+    padding: 15px;
+  }
+
+  .attempt input,
+  .attempt button {
+    font-size: 14px;
+  }
+}
