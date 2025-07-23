@@ -435,6 +435,7 @@ button[type="submit"]:hover {
     flex: 1;
     min-width: 280px;
     padding: 10px 20px;
+
 }
 
 .about-text h2 {
@@ -451,6 +452,7 @@ button[type="submit"]:hover {
 
 .about-text ul li{
     list-style: none;
+    line-height: 35px;
 }
 
 @media (max-width: 768px) {
