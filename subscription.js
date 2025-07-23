@@ -1,28 +1,20 @@
-async function loadTestimonials() {
-    try {
-        const res = await fetch("http://localhost:3000/api/contact");
-        const data = await res.json();
 
-        if (!Array.isArray(data.data)) return;
-
-        const track = document.getElementById("testimonial-track");
-        const testimonials = data.data.slice(0, 10); // limit for performance
-
-        const createSlide = (entry) => `
-        <div class="testimonial">
-          <h3>${entry.name}</h3>
-          <p>${entry.message}</p>
+document.addEventListener("DOMContentLoaded", function () {
+    const subscriptionHTML = `
+    <section class="subscribe">
+        <div class="subscribe-container">
+        <div class="subscription_text">
+            <h2>Subscribe to Our Newsletter</h2>
+            <p>Get updates on the latest news, articles, and launches directly in your inbox.</p>
+            </div>
+            <div class="subscribe-form">
+            <div class="subs_input">
+                <input type="email" placeholder="Enter your email" required class="igft"/>
+                </div>
+                <button type="submit">Subscribe</button>
+            </div>
         </div>
-      `;
-
-        const slides = testimonials.map(createSlide).join("");
-
-        // Duplicate slides for infinite loop
-        track.innerHTML = slides + slides;
-
-    } catch (error) {
-        console.error("Error loading testimonials:", error);
-    }
-}
-
-document.addEventListener("DOMContentLoaded", loadTestimonials);
+    </section>
+    `;
+    document.getElementById("subscription-section").innerHTML = subscriptionHTML;
+});

@@ -11,7 +11,7 @@ const email = userData.user.email;
 document.getElementById('exam-title').textContent = `Welcome, ${username}! Answer the following questions:`;
 
 // Fetch questions
-fetch(`http://localhost:3000/api/questions/${examId}`, {
+fetch(`https://mock-test-backend-uogj.onrender.com/api/questions/${examId}`, {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
@@ -73,7 +73,7 @@ function submitExam() {
 
   document.getElementById('result').textContent = resultText;
 
-  fetch('http://localhost:3000/api/results', {
+  fetch('https://mock-test-backend-uogj.onrender.com/api/results', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -104,7 +104,7 @@ document.getElementById("submit-btn").addEventListener("click", () => {
   if (confirm("Are you sure you want to submit the exam?")) {
     const userId = localStorage.getItem("userId"); // assume you saved it at login or test start
 
-    fetch(`http://localhost:3000/api/users/${userId}/status`, {
+    fetch(`https://mock-test-backend-uogj.onrender.com/api/users/${userId}/status`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"

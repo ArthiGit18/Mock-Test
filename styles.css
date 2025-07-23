@@ -34,6 +34,10 @@ html {
     color: #007bff;
 }
 
+.logo img {
+    height: 70px !important;
+}
+
 .nav-links {
     list-style: none;
     display: flex;
@@ -57,8 +61,10 @@ html {
 .nav-links li a:hover {
     color: #007bff;
     text-shadow: 0 1px 2px rgba(0, 123, 255, 0.6);
-    background-size: 100% 2px; /* animate underline */
+    background-size: 100% 2px;
+    /* animate underline */
 }
+
 .auth-button {
     background-color: #007bff;
     color: white;
@@ -427,53 +433,64 @@ button[type="submit"] {
     .about-content {
         flex-direction: column;
     }
-}
-
-.subscribe {
+}.subscribe {
     background-color: #333;
     color: #fff;
-    padding: 60px;
+    padding: 60px 20px;
     text-align: center;
-
 }
 
 .subscribe-container {
+    max-width: 1000px;
+    margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    column-gap: 20px;
-    width: 100%;
+    flex-wrap: wrap;
+    gap: 30px;
 }
 
-.subscribe-container h2 {
+.subscription_text {
+    /* flex: 1 1 300px; */
+    text-align: left;
+}
+
+.logo-img {
+    width: 150px;
+    margin-bottom: 20px;
+}
+
+.subscription_text h2 {
     font-size: 2rem;
     margin-bottom: 15px;
 }
 
-.subscribe-container p {
+.subscription_text p {
     font-size: 1rem;
     margin-bottom: 30px;
 }
 
 .subscribe-form {
+    /* flex: 1 1 300px; */
     display: flex;
-    justify-content: center;
+    flex-wrap: nowrap;
     gap: 10px;
-    /* flex-wrap: wrap; */
+    justify-content: flex-start;
 }
 
 .subs_input input {
-    padding: 20px;
+    padding: 15px;
     height: 50px;
     font-size: 1rem;
     border: none;
     border-radius: 6px;
-    width: 500px;
-    max-width: 100%;
+    width: 100%;
+    max-width: 300px;
+    box-sizing: border-box;
 }
 
 .subscribe-form button {
-    padding: 10px !important;
+    padding: 15px 20px;
     font-size: 1rem;
     background-color: #ff5e3a;
     color: #fff;
@@ -482,26 +499,36 @@ button[type="submit"] {
     border-radius: 6px;
     cursor: pointer;
     transition: background 0.3s ease;
+    white-space: nowrap;
 }
 
 .subscribe-form button:hover {
     background-color: #e94b2e;
 }
 
-@media (max-width: 600px) {
-    .subscribe-form {
-        flex-direction: row;
+/* RESPONSIVE STYLES */
+@media (max-width: 768px) {
+    .subscribe-container {
+        flex-direction: column;
         align-items: center;
-    }
-
-    .subscribe-form input[type="email"],
-    .subscribe-form button {
-        width: 90%;
-        max-width: 100%;
+        text-align: left;
     }
 
     .subscribe-form {
-        gap: 15px;
+        justify-content: center;
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .subs_input input,
+    .subscribe-form button {
+        width: 300px;
+        margin: auto;
+    }
+
+    .subscribe-form {
+        flex-direction: column;
+         flex-wrap: wrap;
     }
 }
 

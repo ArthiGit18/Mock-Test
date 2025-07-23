@@ -5,7 +5,7 @@ const submitButton = document.getElementById('submit-btn');
 const errorMsg = document.getElementById('error-msg');
 
 // Load test info
-fetch('http://localhost:3000/api/templates', {
+fetch('https://mock-test-backend-uogj.onrender.com/api/templates', {
   headers: { 'secret': 'dummy-secret' }
 })
 .then(res => res.json())
@@ -54,7 +54,7 @@ document.getElementById('exam-form').addEventListener('submit', async (e) => {
   submitButton.textContent = 'Submitting...';
 
   try {
-    const res = await fetch('http://localhost:3000/api/register', {
+    const res = await fetch('https://mock-test-backend-uogj.onrender.com/api/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -96,7 +96,7 @@ document.getElementById('yes-btn').addEventListener('click', async () => {
     localStorage.setItem('exam_user', JSON.stringify(userData));
 
     // Update user status
-    await fetch('http://localhost:3000/api/user/status', {
+    await fetch('https://mock-test-backend-uogj.onrender.com/api/user/status', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -105,7 +105,7 @@ document.getElementById('yes-btn').addEventListener('click', async () => {
     });
 
     // Log exam submission
-    await fetch('http://localhost:3000/api/submit', {
+    await fetch('https://mock-test-backend-uogj.onrender.com/api/submit', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -137,7 +137,7 @@ document.getElementById('no-btn').addEventListener('click', async () => {
   try {
     localStorage.setItem('exam_user', JSON.stringify(userData));
 
-    await fetch('http://localhost:3000/api/user/status', {
+    await fetch('https://mock-test-backend-uogj.onrender.com/api/user/status', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -145,7 +145,7 @@ document.getElementById('no-btn').addEventListener('click', async () => {
       body: JSON.stringify({ email: formData.email, status: 'not_started' })
     });
 
-    await fetch('http://localhost:3000/api/submit', {
+    await fetch('https://mock-test-backend-uogj.onrender.com/api/submit', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

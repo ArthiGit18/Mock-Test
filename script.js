@@ -1,6 +1,6 @@
 // async function fetchTemplates() {
 //     try {
-//         const response = await fetch("http://localhost:3000/api/templates", {
+//         const response = await fetch("https://mock-test-backend-uogj.onrender.com/api/templates", {
 //             method: "GET",
 //             headers: {
 //                 "Content-Type": "application/json",
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const password = document.getElementById("login-password").value.trim();
 
     try {
-      const res = await fetch("http://localhost:3000/test/login", {
+      const res = await fetch("https://mock-test-backend-uogj.onrender.com/test/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const phone = document.getElementById("signup-phone").value.trim();
 
     try {
-      const res = await fetch("http://localhost:3000/test/signup", {
+      const res = await fetch("https://mock-test-backend-uogj.onrender.com/test/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password, username, phone }),
@@ -121,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // Fetch templates
 async function fetchTemplates() {
   try {
-    const response = await fetch("http://localhost:3000/api/templates", {
+    const response = await fetch("https://mock-test-backend-uogj.onrender.com/api/templates", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
