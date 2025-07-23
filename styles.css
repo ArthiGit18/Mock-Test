@@ -449,9 +449,16 @@ button[type="submit"]:hover {
     color: #555;
 }
 
+.about-text ul li{
+    list-style: none;
+}
+
 @media (max-width: 768px) {
     .about-content {
         flex-direction: column;
+    }
+    .about-text{
+        padding: 0 60px;
     }
 }
 
