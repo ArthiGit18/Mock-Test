@@ -13,7 +13,7 @@
 <nav class="navbar">
     <div class="logo">
         <img src="./assets/logo/1.png" alt="Logo" style="height: 40px; vertical-align: middle; margin-right: 8px;" />
-        MyMockApp
+        MockStore
     </div>
     <ul class="nav-links">
         <li><a href="#">Home</a></li>
@@ -21,7 +21,7 @@
         <li><a href="#contact-section">Contact</a></li>
         <li><a href="#testimonial-section">Customer Reviews</a></li>
     </ul>
-    <div>
+    <div class="nav_btn">
         <button class="auth-button" id="open-login">Login</button>
         <button class="auth-button" id="open-signup">Sign Up</button>
     </div>
@@ -40,24 +40,28 @@
 <div id="about-section" class="section"></div>
 
 <!-- Header -->
+<!-- <div class="content_index">
+    <header>
+        <h1>Available Mock Tests</h1>
+        <button class="user-button" onclick="window.location.href='user.html'">User List</button>
+    </header>
+
+    <div id="templateContainer">Loading templates...</div>
+</div> -->
+
 <div class="content_index">
     <header>
         <h1>Available Mock Tests</h1>
         <button class="user-button" onclick="window.location.href='user.html'">User List</button>
     </header>
 
-
-
-    <!-- Template Cards -->
     <div id="templateContainer">Loading templates...</div>
+    <div style="text-align: center; margin-top: 10px;">
+        <button id="toggleButton" onclick="toggleTemplates()">Show More</button>
+    </div>
 </div>
 
-<!-- <section id="testimonial-section" class="testimonial-section">
-    <h2>What Our Visitors Say</h2>
-    <div class="testimonial-wrapper">
-        <div id="testimonial-track" class="testimonial-container"></div>
-    </div>
-</section> -->
+
 
 <section class="testimonial-section" id="testimonial-section">
     <h2>What Our Visitors Say</h2>
@@ -80,8 +84,10 @@
 
 <div class="modal" id="login-modal">
     <div class="modal-content">
-        <span class="close-btn" onclick="closeModal('login-modal')">&times;</span>
-        <h2>Login</h2>
+        <div>
+            <span class="close-btn" onclick="closeModal('login-modal')">&times;</span>
+            <h2>Login</h2>
+        </div>
         <form id="login-form">
             <input type="email" id="login-email" placeholder="Email" required />
             <input type="password" id="login-password" placeholder="Password" required />
@@ -93,8 +99,10 @@
 <!-- Signup Modal -->
 <div class="modal" id="signup-modal">
     <div class="modal-content">
-        <span class="close-btn" onclick="closeModal('signup-modal')">&times;</span>
-        <h2>Sign Up</h2>
+        <div>
+            <span class="close-btn" onclick="closeModal('signup-modal')">&times;</span>
+            <h2>Sign Up</h2>
+        </div>
         <form id="signup-form">
             <input type="email" id="signup-email" placeholder="Email" required />
             <input type="password" id="signup-password" placeholder="Password" required />

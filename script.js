@@ -119,6 +119,9 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Fetch templates
+let templatesData = []; // to store the fetched data
+let showingAll = false;
+
 async function fetchTemplates() {
   try {
     const response = await fetch("https://mock-test-backend-uogj.onrender.com/api/templates", {
@@ -130,31 +133,51 @@ async function fetchTemplates() {
     });
 
     const result = await response.json();
-    const container = document.getElementById("templateContainer");
-    container.innerHTML = "";
-
-    if (!result.error && result.data.length > 0) {
-      result.data.forEach((template, index) => {
-        const card = document.createElement("div");
-        card.className = "template-card";
-
-        card.innerHTML = `
-          <h2>${template.name || 'Test ' + (index + 1)}</h2>
-          <p><strong>Module:</strong> ${template.module}</p>
-          <p><strong>Mock Type:</strong> ${template.mockType}</p>
-          <p><strong>Duration:</strong> ${template.duration} seconds</p>
-          <button onclick="window.location.href='instruction.html?id=${template.id}'">Overview</button>
-        `;
-
-        container.appendChild(card);
-      });
+    if (!result.error && Array.isArray(result.data)) {
+      templatesData = result.data;
+      renderTemplates();
     } else {
-      container.innerHTML = "<p>No templates found.</p>";
+      document.getElementById("templateContainer").innerHTML = "<p>No templates found.</p>";
     }
   } catch (error) {
     document.getElementById("templateContainer").innerHTML = `<p>Error: ${error.message}</p>`;
   }
 }
+
+function renderTemplates() {
+  const container = document.getElementById("templateContainer");
+  container.innerHTML = "";
+
+  const dataToRender = showingAll ? templatesData : templatesData.slice(0, 3);
+
+  dataToRender.forEach((template, index) => {
+    const card = document.createElement("div");
+    card.className = "template-card";
+
+    card.innerHTML = `
+      <h2>${template.name || 'Test ' + (index + 1)}</h2>
+      <p><strong>Module:</strong> ${template.module}</p>
+      <p><strong>Mock Type:</strong> ${template.mockType}</p>
+      <p><strong>Duration:</strong> ${template.duration} seconds</p>
+      <button onclick="window.location.href='instruction.html?id=${template.id}'">Overview</button>
+    `;
+
+    container.appendChild(card);
+  });
+
+  // Update button text
+  const toggleButton = document.getElementById("toggleButton");
+  toggleButton.style.display = templatesData.length > 3 ? "inline-block" : "none";
+  toggleButton.textContent = showingAll ? "Show Less" : "Show More";
+}
+
+function toggleTemplates() {
+  showingAll = !showingAll;
+  renderTemplates();
+}
+
+document.addEventListener("DOMContentLoaded", fetchTemplates);
+
 
 function closeModal(id) {
   document.getElementById(id).style.display = "none";

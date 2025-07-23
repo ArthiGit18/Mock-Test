@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
           <div class="footer-left">
   <div style="display: flex; align-items: center; gap: 10px;">
     <img src="./assets/logo/2.png" alt="Logo" style="height: 100px;" />
-    <h3>MyMockApp</h3>
+    <h3>MockStore</h3>
   </div>
   <p>&copy; ${new Date().getFullYear()} MyCompany. All rights reserved.</p>
 </div>
