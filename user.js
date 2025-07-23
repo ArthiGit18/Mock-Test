@@ -2,7 +2,7 @@ let deleteUserId = null;
 
 async function fetchUsers() {
     try {
-        const response = await fetch("https://mock-test-backend-uogj.onrender.com/api/questions/api/users");
+        const response = await fetch("https://mock-test-backend-uogj.onrender.com/api/users");
         const result = await response.json();
 
         const tbody = document.querySelector("#userTable tbody");
@@ -47,7 +47,7 @@ function attachDeleteHandlers() {
     document.getElementById("confirmYes").onclick = async () => {
         if (deleteUserId) {
             try {
-                const response = await fetch(`https://mock-test-backend-uogj.onrender.com/api/questions/api/users/${deleteUserId}`, {
+                const response = await fetch(`https://mock-test-backend-uogj.onrender.com/api/users/${deleteUserId}`, {
                     method: "DELETE"
                 });
                 const result = await response.json();
