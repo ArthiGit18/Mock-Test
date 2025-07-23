@@ -5,105 +5,114 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mock Test Templates</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-            background: #f2f2f2;
-        }
-
-        .template-card {
-            background: white;
-            padding: 16px;
-            margin-bottom: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .template-card h2 {
-            margin: 0;
-        }
-
-        .template-card p {
-            margin: 4px 0;
-        }
-
-        .overview {
-            margin-top: 10px;
-            display: none;
-            background: #f9f9f9;
-            padding: 10px;
-            border-radius: 6px;
-        }
-
-        button {
-            margin-top: 10px;
-            padding: 6px 12px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    <link rel="stylesheet" href="./styles.css" />
 </head>
 
-<body>
+<hr>
+<nav class="navbar">
+    <div class="logo">MyMockApp</div>
+    <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#about-section">About</a></li>
+        <li><a href="#contact-section">Contact</a></li>
+        <li><a href="#testimonial-section">Customer Reviews</a></li>
+    </ul>
+    <div>
+        <button class="auth-button" id="open-login">Login</button>
+        <button class="auth-button" id="open-signup">Sign Up</button>
+    </div>
+</nav>
 
-    <h1>Available Mock Tests</h1>
+<section class="video-banner">
+    <video autoplay muted loop playsinline class="banner-video">
+        <source src="./assets/2.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+    </video>
+    <div class="banner-overlay">
+        <div id="banner-text" class="banner-text active"></div>
+    </div>
+</section>
+
+<div id="about-section" class="section"></div>
+
+<!-- Header -->
+<div class="content_index">
+    <header>
+        <h1>Available Mock Tests</h1>
+        <button class="user-button" onclick="window.location.href='user.html'">User List</button>
+    </header>
+
+
+
+    <!-- Template Cards -->
     <div id="templateContainer">Loading templates...</div>
+</div>
 
-    <script>
-        async function fetchTemplates() {
-            try {
-                const response = await fetch("http://localhost:3000/api/templates", {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "secret": "dummy-secret"
-                    }
-                });
+<section id="testimonial-section" class="testimonial-section">
+    <h2>What Our Visitors Say</h2>
+    <div class="testimonial-wrapper">
+        <div id="testimonial-track" class="testimonial-track"></div>
+    </div>
+</section>
 
-                const result = await response.json();
-                const container = document.getElementById("templateContainer");
-                container.innerHTML = ""; // clear loading text
 
-                if (!result.error && result.data.length > 0) {
-                    result.data.forEach((template, index) => {
-                        const card = document.createElement("div");
-                        card.className = "template-card";
+<hr>
+</hr>
 
-                        card.innerHTML = `
-              <h2>${template.name || 'Test ' + (index + 1)}</h2>
-              <p><strong>Module:</strong> ${template.module}</p>
-              <p><strong>Mock Type:</strong> ${template.mockType}</p>
-              <p><strong>Duration:</strong> ${template.duration} seconds</p>
-             <button onclick="window.location.href='instruction.html?id=${template.id}'">Overview</button>
+<div id="contact-section" class="section"></div>
 
-            
-            `;
+<div id="subscription-section"></div>
 
-                        container.appendChild(card);
-                    });
-                } else {
-                    container.innerHTML = "<p>No templates found.</p>";
-                }
-            } catch (error) {
-                document.getElementById("templateContainer").innerHTML = `<p>Error loading templates: ${error.message}</p>`;
-            }
-        }
+<div id="footer-section"></div>
 
-        function toggleOverview(id) {
-            const el = document.getElementById(id);
-            el.style.display = el.style.display === "none" ? "block" : "none";
-        }
 
-        fetchTemplates();
-    </script>
+
+<div class="modal" id="login-modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('login-modal')">&times;</span>
+        <h2>Login</h2>
+        <form id="login-form">
+            <input type="email" id="login-email" placeholder="Email" required />
+            <input type="password" id="login-password" placeholder="Password" required />
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</div>
+
+<!-- Signup Modal -->
+<div class="modal" id="signup-modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('signup-modal')">&times;</span>
+        <h2>Sign Up</h2>
+        <form id="signup-form">
+            <input type="email" id="signup-email" placeholder="Email" required />
+            <input type="password" id="signup-password" placeholder="Password" required />
+            <input type="text" id="signup-username" placeholder="Username" required />
+            <input type="text" id="signup-phone" placeholder="Mobile Number" required />
+            <button type="submit">Sign Up</button>
+        </form>
+    </div>
+</div>
+
+
+
+
+<!-- Avatar -->
+<div class="avatar-container" id="avatar-container" style="display: none;">
+    <div class="avatar-circle avatar-username"></div>
+    <div class="logout-menu" id="logout-menu">Logout</div>
+</div>
+
+
+<script src="./banner.js"></script>
+<script src="./about.js"></script>
+<script src="./script.js"></script>
+<script src="./testimonial.js"></script>
+
+<script src="./contact.js"></script>
+<script src="./subscription.js"></script>
+<script src="./footer.js"></script>
+
 </body>
 
 </html>

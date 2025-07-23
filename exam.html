@@ -1,154 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
   <title>Exam Page</title>
   <style>
     body {
       font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      margin: 0;
       padding: 20px;
-      background: #f9f9f9;
+    }
+
+    #exam-title {
+      text-align: center;
+      color: #333;
     }
 
     .exam-container {
-      background: #fff;
-      padding: 20px;
-      border-radius: 6px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       max-width: 800px;
       margin: auto;
+      background: #fff;
+      padding: 30px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
-    .question {
-      margin-bottom: 20px;
+    .question-block {
+      margin-bottom: 25px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #ccc;
     }
 
-    .question h4 {
+    .question-block h4 {
       margin-bottom: 10px;
+      color: #222;
     }
 
-    .options label {
-      display: block;
-      margin-bottom: 6px;
+    .question-block ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .question-block li {
+      margin-bottom: 8px;
+    }
+
+    .question-block input[type="radio"] {
+      margin-right: 8px;
     }
 
     .submit-btn {
-      padding: 10px 20px;
-      background: #007bff;
+      display: block;
+      margin: 20px auto;
+      padding: 12px 25px;
+      background-color: #007BFF;
       color: white;
       border: none;
-      border-radius: 4px;
+      border-radius: 5px;
+      font-size: 16px;
       cursor: pointer;
     }
 
     .submit-btn:hover {
-      background: #0056b3;
+      background-color: #0056b3;
     }
 
     .result {
-      margin-top: 20px;
-      padding: 10px;
-      background: #dff0d8;
-      border: 1px solid #3c763d;
-      color: #3c763d;
-      border-radius: 4px;
+      text-align: center;
+      font-size: 18px;
+      margin-top: 30px;
+      color: green;
     }
   </style>
 </head>
-
 <body>
+  <h2 id="exam-title">Exam Questions</h2>
+
   <div class="exam-container">
-    <h2 id="exam-title">Exam</h2>
-    <p>
-      <strong>User:</strong> <span id="username"></span> |
-      <strong>Email:</strong> <span id="email"></span>
-    </p>
-    <div id="questions-container"></div>
+    <div id="question-container">Loading questions...</div>
     <button class="submit-btn" onclick="submitExam()">Submit</button>
-    <div id="result" class="result" style="display:none;"></div>
+    <div id="result" class="result"></div>
   </div>
 
-  <script>
-    const testId = new URLSearchParams(window.location.search).get('id');
-
-    // Get user from localStorage (key: exam_user)
-    const storedUser = JSON.parse(localStorage.getItem('exam_user') || '{}');
-    const username = storedUser.username || 'Unknown';
-    const email = storedUser.email || 'N/A';
-    const password = storedUser.password || '';
-
-    document.getElementById('username').textContent = username;
-    document.getElementById('email').textContent = email;
-    document.getElementById('exam-title').textContent = `Exam: ${testId}`;
-
-    let correctAnswers = {};
-    let totalQuestions = 0;
-
-    fetch(`http://localhost:3000/api/questions/${testId}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'secret': 'dummy-secret'
-      },
-      body: JSON.stringify({
-        user: {
-          name: username,
-          email: email,
-          password: password
-        }
-      })
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (data.error) {
-          alert("Error loading questions.");
-          return;
-        }
-
-        const container = document.getElementById('questions-container');
-        totalQuestions = data.questions.length;
-
-        data.questions.forEach((q, index) => {
-          correctAnswers[`q${index}`] = q.correct;
-          const div = document.createElement('div');
-          div.className = 'question';
-          div.innerHTML = `
-            <h4>Q${index + 1}. ${q.question}</h4>
-            <div class="options">
-              ${q.options.map(opt => `
-                <label>
-                  <input type="radio" name="q${index}" value="${opt}" />
-                  ${opt}
-                </label>
-              `).join('')}
-            </div>
-          `;
-          container.appendChild(div);
-        });
-      })
-      .catch(err => {
-        console.error("Failed to load questions:", err);
-      });
-
-    function submitExam() {
-      let score = 0;
-
-      for (let i = 0; i < totalQuestions; i++) {
-        const selected = document.querySelector(`input[name="q${i}"]:checked`);
-        if (selected && selected.value === correctAnswers[`q${i}`]) {
-          score++;
-        }
-      }
-
-      document.getElementById('result').style.display = 'block';
-      document.getElementById('result').innerHTML = `
-        Thank you, <strong>${username}</strong>!<br/>
-        You scored <strong>${score}</strong> out of <strong>${totalQuestions}</strong>.
-      `;
-    }
-  </script>
+  <script src="exam.js"></script>
 </body>
-
 </html>

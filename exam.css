@@ -1,0 +1,94 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f4f6f9;
+}
+
+.exam-container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+p {
+    color: #555;
+}
+
+.question {
+    margin-top: 25px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #fafafa;
+}
+
+.question h4 {
+    margin-bottom: 15px;
+    color: #222;
+}
+
+.options label {
+    display: block;
+    margin-bottom: 8px;
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 5px;
+    transition: background 0.2s ease;
+}
+
+.options label:hover {
+    background-color: #f0f0f0;
+}
+
+input[type="radio"] {
+    margin-right: 10px;
+}
+
+.submit-btn {
+    display: block;
+    margin: 30px auto 10px;
+    padding: 12px 30px;
+    font-size: 16px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #0056b3;
+}
+
+.result {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 18px;
+    background-color: #e6ffe6;
+    border-left: 6px solid #28a745;
+    color: #155724;
+    display: none;
+}
+
+@media (max-width: 600px) {
+    .exam-container {
+        padding: 20px;
+        margin: 20px 10px;
+    }
+
+    .submit-btn {
+        width: 100%;
+    }
+}

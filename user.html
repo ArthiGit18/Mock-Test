@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registered Users</title>
+  <link rel="stylesheet" href="./user.css" />
+</head>
+
+<body>
+
+  <a href="./index.html" class="back-button">← Back to Home</a>
+  <h1>Registered Users</h1>
+
+  <table id="userTable">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Status</th>
+        <th>Submission</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Populated via JS -->
+    </tbody>
+  </table>
+
+  <!-- Confirmation Modal -->
+  <div id="confirmModal" class="modal hidden">
+    <div class="modal-content">
+      <p>Are you sure you want to delete this user?</p>
+      <div class="modal-actions">
+        <button id="confirmYes">Yes</button>
+        <button id="confirmNo">No</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="./user.js"></script>
+</body>
+
+</html>
