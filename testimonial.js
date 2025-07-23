@@ -1,13 +1,13 @@
 async function loadTestimonials() {
     try {
-        const res = await fetch("http://localhost:3000/api/contact");
+        const res = await fetch("https://mock-test-backend-uogj.onrender.com/api/contact");
         const data = await res.json();
 
         if (data.error || !Array.isArray(data.data)) {
             throw new Error("Failed to load testimonials");
         }
 
-        const container = document.getElementById("testimonial-container");
+        const container = document.getElementById("testimonial-track");
         container.innerHTML = ""; // Clear old content
 
         data.data.slice(0, 6).forEach(entry => {
