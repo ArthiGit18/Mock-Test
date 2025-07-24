@@ -3,14 +3,10 @@ if (!userData || !userData.examId || !userData.user) {
   alert('User not found. Redirecting...');
   window.location.href = 'index.html';
 }
-
 const examId = userData.examId;
 const username = userData.user.name;
 const email = userData.user.email;
-
 document.getElementById('exam-title').textContent = `Welcome, ${username}! Answer the following questions:`;
-
-// Fetch questions
 fetch(`https://mock-test-backend-uogj.onrender.com/api/questions/${examId}`, {
   method: 'POST',
   headers: {
@@ -23,14 +19,11 @@ fetch(`https://mock-test-backend-uogj.onrender.com/api/questions/${examId}`, {
 .then(data => {
   const container = document.getElementById('question-container');
   container.innerHTML = '';
-
   if (data.error || !data.questions || !data.questions.length) {
     container.textContent = 'No questions available.';
     return;
   }
-
   window.examQuestions = data.questions;
-
   data.questions.forEach((q, index) => {
     const div = document.createElement('div');
     div.className = 'question-block';
@@ -51,28 +44,21 @@ fetch(`https://mock-test-backend-uogj.onrender.com/api/questions/${examId}`, {
   console.error('Error loading questions:', err);
   document.getElementById('question-container').textContent = 'Failed to load questions.';
 });
-
-// Submit handler
 function submitExam() {
   const confirmed = confirm("Are you sure you want to submit your answers?");
   if (!confirmed) return;
-
   const questions = window.examQuestions;
   let score = 0;
-
   questions.forEach((q, index) => {
     const selected = document.querySelector(`input[name="q${index}"]:checked`);
     if (selected && selected.value === q.correct) {
       score++;
     }
   });
-
   const total = questions.length;
   const percentage = ((score / total) * 100).toFixed(2);
   const resultText = `You answered ${score} out of ${total} correctly. (${percentage}%)`;
-
   document.getElementById('result').textContent = resultText;
-
   fetch('https://mock-test-backend-uogj.onrender.com/api/results', {
     method: 'POST',
     headers: {
@@ -92,7 +78,7 @@ function submitExam() {
       alert('Submitted successfully!');
       localStorage.removeItem('exam_user');
       setTimeout(() => {
-        window.location.href = 'index.html'; // <-- change path if needed
+        window.location.href = 'index.html';
       }, 500);
     })
     .catch(err => {
@@ -102,8 +88,7 @@ function submitExam() {
 }
 document.getElementById("submit-btn").addEventListener("click", () => {
   if (confirm("Are you sure you want to submit the exam?")) {
-    const userId = localStorage.getItem("userId"); // assume you saved it at login or test start
-
+    const userId = localStorage.getItem("userId");
     fetch(`https://mock-test-backend-uogj.onrender.com/api/users/${userId}/status`, {
       method: "PUT",
       headers: {

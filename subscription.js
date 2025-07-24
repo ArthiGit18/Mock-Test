@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", function () {
     const subscriptionHTML = `
     <section class="subscribe">
@@ -17,20 +16,13 @@ document.addEventListener("DOMContentLoaded", function () {
       </div>
     </section>
   `;
-
     document.getElementById("subscription-section").innerHTML = subscriptionHTML;
-
-    // Handle subscribe button click
     const subscribeBtn = document.getElementById("subscribe-btn");
     const emailInput = document.getElementById("subscriber-email");
     const messageBox = document.getElementById("subscribe-msg");
-
     subscribeBtn.addEventListener("click", function () {
         const email = emailInput.value.trim();
-
-        // FIXED regex
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
         if (emailRegex.test(email)) {
             messageBox.textContent = "Thanks for subscribing!";
             messageBox.style.color = "yellowgreen";
@@ -43,6 +35,5 @@ document.addEventListener("DOMContentLoaded", function () {
             messageBox.style.fontSize = "20px";
             messageBox.style.fontWeight = "700";
         }
-
     });
 });

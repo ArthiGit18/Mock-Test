@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", function () {
             <button type="submit">Send Message</button>
           </form>
         </div>
-
         <!-- Right: Contact Info -->
         <div class="contact-info">
           <h3>Get in Touch</h3>
@@ -28,28 +27,20 @@ document.addEventListener("DOMContentLoaded", function () {
     </section>
   `;
   document.getElementById("contact-section").innerHTML = contactHTML;
-
-  // Add submit handler
   const form = document.getElementById("contact-form");
-
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
-
     const name = form.name.value;
     const email = form.email.value;
     const message = form.message.value;
-
     try {
       const res = await fetch("http://localhost:3000/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, message }),
       });
-
       const result = await res.json();
       alert(result.message);
-
-      // Optionally reset form
       if (!result.error) form.reset();
     } catch (err) {
       console.error(err);

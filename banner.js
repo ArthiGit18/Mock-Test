@@ -5,19 +5,15 @@ const banners = [
   "Access a <strong>Report Fetch API</strong> after the test to get detailed feedback including scores, user answers, and tips.",
   "<strong>Test Types:</strong> Full-Length IELTS, 30-min Diagnostics, or Individual Sections—tailored for user needs."
 ];
-
 let index = 0;
 const bannerText = document.getElementById("banner-text");
-
 function updateBanner() {
   bannerText.classList.remove("active");
   setTimeout(() => {
     bannerText.innerHTML = banners[index];
     bannerText.classList.add("active");
     index = (index + 1) % banners.length;
-  }, 300); // Fade-out duration
+  }, 300);
 }
-
-// Initial load
 updateBanner();
-setInterval(updateBanner, 5000); // Change every 5s
+setInterval(updateBanner, 5000);

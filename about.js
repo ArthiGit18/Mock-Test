@@ -1,9 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   const container = document.getElementById("about-section");
-
-  // Create section (hidden initially)
   const section = document.createElement("section");
-  section.className = "about-section"; // Initial hidden state
+  section.className = "about-section";
   section.innerHTML = `
     <div class="about-content">
       <div class="about-image">
@@ -21,20 +19,16 @@ document.addEventListener("DOMContentLoaded", function () {
       </div>
     </div>
   `;
-
   container.appendChild(section);
-
-  // Scroll observer
   const observer = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('visible'); // Trigger animation
-        observer.unobserve(entry.target); // Only once
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
       }
     });
   }, {
-    threshold: 0.2 // Start animation when 20% visible
+    threshold: 0.2
   });
-
   observer.observe(section);
 });
