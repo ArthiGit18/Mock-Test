@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Test Instructions</title>
   <link rel="stylesheet" href="./instruction.css">
 </head>
@@ -46,14 +47,27 @@
     </form>
   </div>
 
-  <div id="confirmation-popup">
+  <!-- <div id="confirmation-popup">
     <div class="popup-box">
       <p>Are you willing to attend the test?</p>
       <button id="yes-btn">Yes</button>
       <button id="no-btn">No</button>
     </div>
+  </div> -->
+
+ <div id="confirmation-popup" style="display: none;">
+  <div class="popup-box">
+    <p>Are you willing to attend the test?</p>
+    <p><strong>Email:</strong> <span id="popup-email"></span></p>
+    <p><strong>Exam ID:</strong> <span id="popup-examid"></span></p>
+    <p><strong>Password:</strong> <span id="popup-password"></span></p>
+    <button id="yes-btn">Yes</button>
+    <button id="no-btn">No</button>
   </div>
+</div>
+
 
   <script src="./instruction.js"></script>
 </body>
+
 </html>

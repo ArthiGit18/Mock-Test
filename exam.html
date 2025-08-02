@@ -1,86 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Exam Page</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
-      margin: 0;
-      padding: 20px;
-    }
-
-    #exam-title {
-      text-align: center;
-      color: #333;
-    }
-
-    .exam-container {
-      max-width: 800px;
-      margin: auto;
-      background: #fff;
-      padding: 30px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .question-block {
-      margin-bottom: 25px;
-      padding-bottom: 15px;
-      border-bottom: 1px solid #ccc;
-    }
-
-    .question-block h4 {
-      margin-bottom: 10px;
-      color: #222;
-    }
-
-    .question-block ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .question-block li {
-      margin-bottom: 8px;
-    }
-
-    .question-block input[type="radio"] {
-      margin-right: 8px;
-    }
-
-    .submit-btn {
-      display: block;
-      margin: 20px auto;
-      padding: 12px 25px;
-      background-color: #007BFF;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    .submit-btn:hover {
-      background-color: #0056b3;
-    }
-
-    .result {
-      text-align: center;
-      font-size: 18px;
-      margin-top: 30px;
-      color: green;
-    }
-  </style>
+  <link rel="stylesheet" href="./exam.css" />
+ 
 </head>
-<body>
-  <h2 id="exam-title">Exam Questions</h2>
 
-  <div class="exam-container">
+<body>
+  <h2 id="exam-title">Exam Verification</h2>
+
+  <div id="login-form">
+    <label>Username: <input type="text" id="username" /></label><br />
+    <label>Password: <input type="password" id="password" /></label><br />
+    <button onclick="verifyUser()">Start Exam</button>
+    <div id="login-error" style="color:red;"></div>
+  </div>
+
+  <div class="exam-container" style="display: none;">
     <div id="question-container">Loading questions...</div>
     <button class="submit-btn" onclick="submitExam()">Submit</button>
     <div id="result" class="result"></div>
   </div>
 
+  <!-- Result Popup -->
+<div id="result-popup" style="display: none;" class="popup-box">
+  <div class="popup-content">
+    <p id="result-message"></p>
+    <button id="leave-btn">Leave</button>
+  </div>
+</div>
+
+
   <script src="exam.js"></script>
 </body>
+
 </html>

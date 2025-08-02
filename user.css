@@ -37,13 +37,15 @@ th {
   font-size: 14px;
 }
 
-.pending {
-  background-color: #dc3545;
+.status-btn.pending {
+  background-color: orange;
+  cursor: pointer; /* Add this line */
+}
+.status-btn.completed {
+  background-color: green;
 }
 
-.completed {
-  background-color: #28a745;
-}
+
 
 .back-button {
   margin-bottom: 20px;

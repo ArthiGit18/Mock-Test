@@ -1,7 +1,7 @@
 let deleteUserId = null;
 async function fetchUsers() {
     try {
-        const response = await fetch("https://mock-test-backend-uogj.onrender.com/api/users");
+        const response = await fetch("http://localhost:3000/api/users");
         const result = await response.json();
         const tbody = document.querySelector("#userTable tbody");
         tbody.innerHTML = "";
@@ -13,13 +13,15 @@ async function fetchUsers() {
                 row.innerHTML = `
           <td>${user.username || 'N/A'}</td>
           <td>${user.email || 'N/A'}</td>
-          <td>${status}</td>
-          <td><button class="status-btn ${statusClass}">${status}</button></td>
+          <td>${user.total}</td>
+          <td><button class="status-btn ${statusClass}" data-email="${user.email}" data-examid="${user.examId}">${status}</button></td>
+
           <td><button class="delete-btn" data-id="${user._id}">Delete</button></td>
         `;
                 tbody.appendChild(row);
             });
             attachDeleteHandlers();
+            attachStatusHandlers(); 
         } else {
             tbody.innerHTML = "<tr><td colspan='5'>No users found.</td></tr>";
         }
@@ -27,7 +29,10 @@ async function fetchUsers() {
         document.querySelector("#userTable tbody").innerHTML =
             `<tr><td colspan="5">Error: ${err.message}</td></tr>`;
     }
+
 }
+
+
 function attachDeleteHandlers() {
     document.querySelectorAll(".delete-btn").forEach(button => {
         button.addEventListener("click", (e) => {
@@ -38,7 +43,7 @@ function attachDeleteHandlers() {
     document.getElementById("confirmYes").onclick = async () => {
         if (deleteUserId) {
             try {
-                const response = await fetch(`https://mock-test-backend-uogj.onrender.com/api/users/${deleteUserId}`, {
+                const response = await fetch(`http://localhost:3000/api/users/${deleteUserId}`, {
                     method: "DELETE"
                 });
                 const result = await response.json();
@@ -61,3 +66,22 @@ function attachDeleteHandlers() {
     };
 }
 fetchUsers();
+
+function attachStatusHandlers() {
+    const statusButtons = document.querySelectorAll(".status-btn.pending");
+
+    statusButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            const email = button.getAttribute("data-email");
+            const examId = button.getAttribute("data-examid");
+
+            if (email && examId) {
+                const url = `http://127.0.0.1:5500/frontend/exam.html?email=${encodeURIComponent(email)}&examId=${encodeURIComponent(examId)}`;
+                window.location.href = url;
+            } else {
+                alert("Missing email or exam ID for this user.");
+            }
+        });
+    });
+}
+
