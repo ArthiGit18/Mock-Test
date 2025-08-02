@@ -3,7 +3,7 @@ const testId = urlParams.get('id');
 let formData = {};
 const submitButton = document.getElementById('submit-btn');
 const errorMsg = document.getElementById('error-msg');
-fetch('http://localhost:3000/api/templates', {
+fetch('https://mock-test-backend-uogj.onrender.com/api/templates', {
   headers: { 'secret': 'dummy-secret' }
 })
   .then(res => res.json())
@@ -24,8 +24,6 @@ fetch('http://localhost:3000/api/templates', {
     });
   })
   .catch(err => console.error('Error fetching template:', err));
-
-
 document.getElementById('exam-form').addEventListener('submit', async (e) => {
   e.preventDefault();
   const username = document.getElementById('username').value.trim();
@@ -44,7 +42,7 @@ document.getElementById('exam-form').addEventListener('submit', async (e) => {
   submitButton.disabled = true;
   submitButton.textContent = 'Submitting...';
   try {
-    const res = await fetch('http://localhost:3000/api/register', {
+    const res = await fetch('https://mock-test-backend-uogj.onrender.com/api/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -71,7 +69,6 @@ document.getElementById('exam-form').addEventListener('submit', async (e) => {
     submitButton.textContent = 'Start Exam';
   }
 });
-
 document.getElementById('yes-btn').addEventListener('click', async () => {
   const userData = {
     user: {
@@ -83,13 +80,9 @@ document.getElementById('yes-btn').addEventListener('click', async () => {
     total: 0,
     status: 'pending'
   };
-
   try {
-    // Save to localStorage
     localStorage.setItem('exam_user', JSON.stringify(userData));
-
-    // Update user status
-    await fetch('http://localhost:3000/api/user/status', {
+    await fetch('https://mock-test-backend-uogj.onrender.com/api/user/status', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -99,9 +92,7 @@ document.getElementById('yes-btn').addEventListener('click', async () => {
         status: 'pending'
       })
     });
-
-    // Submit user data
-    await fetch('http://localhost:3000/api/submit', {
+    await fetch('https://mock-test-backend-uogj.onrender.com/api/submit', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -109,48 +100,35 @@ document.getElementById('yes-btn').addEventListener('click', async () => {
       },
       body: JSON.stringify(userData)
     });
-
    window.location.href = `/frontend/exam.html?email=${formData.email}&examId=${testId}`;
-
-  //  window.location.href = `/exam.html?email=${formData.email}&examId=${testId}`;
-
-
   } catch (err) {
     alert('Error submitting start status');
     console.error(err);
     location.reload();
   }
 });
-
 document.getElementById('no-btn').addEventListener('click', async () => {
   const userData = {
     user: { name: formData.username, email: formData.email },
     examId: testId,
     score: 0,
     total: 0,
-    status: 'pending'  // Set status here
+    status: 'pending'
   };
-
   try {
     localStorage.setItem('exam_user', JSON.stringify(userData));
-
-    await fetch('http://localhost:3000/api/submit', {
+    await fetch('https://mock-test-backend-uogj.onrender.com/api/submit', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(userData)
     });
-
     alert('You chose not to start the test. Your data has been saved.');
-
-    // Redirect to homepage or index page
-    window.location.href = 'index.html';  // Adjust if file/path is different
-
+    window.location.href = 'index.html';
   } catch (err) {
     console.error('Error submitting not-started test:', err);
   } finally {
     document.getElementById('confirmation-popup').style.display = 'none';
   }
 });
-
